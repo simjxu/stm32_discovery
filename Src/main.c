@@ -121,7 +121,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_Delay(2000);
+    HAL_Delay(3000);
     // Causes the LED to toggle back and forth
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
     // printf("Hello World");
