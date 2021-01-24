@@ -56,7 +56,7 @@
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
+
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
