@@ -26,7 +26,20 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
-#include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit
+#include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
+
+// Right now, this class cannot be placed into separate .h and cpp files because it requires CDC_Transmit_FS, 
+// which is defined in another fle
+class FatherProperty {
+private:
+    static uint8_t propValue[];        // I need to declare this as static, why?
+
+public:
+    void getProperty();
+};
+uint8_t FatherProperty::propValue[]="asdf\n";
+void FatherProperty::getProperty() {CDC_Transmit_FS(this->propValue,5);}
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -74,6 +87,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   uint8_t buffer[]="Hello World!\n";
+  FatherProperty fp;
+  // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -113,8 +128,9 @@ int main(void)
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
     HAL_Delay(1500);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    CDC_Transmit_FS(buffer,sizeof(buffer));
+    CDC_Transmit_FS(buffer,sizeof(buffer)-1);
     HAL_Delay(1500);
+    fp.getProperty();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
