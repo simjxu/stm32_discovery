@@ -27,18 +27,7 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
-
-// Right now, this class cannot be placed into separate .h and cpp files because it requires CDC_Transmit_FS, 
-// which is defined in another fle
-class FatherProperty {
-private:
-    static uint8_t propValue[];        // I need to declare this as static, why?
-
-public:
-    void getProperty();
-};
-uint8_t FatherProperty::propValue[]="asdf\n";
-void FatherProperty::getProperty() {CDC_Transmit_FS(this->propValue,5);}
+#include "classtest.h"
 
 
 /* Private includes ----------------------------------------------------------*/
