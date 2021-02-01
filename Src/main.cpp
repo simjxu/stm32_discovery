@@ -76,7 +76,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   uint8_t buffer[]="Hello World!\n";
-  FatherProperty fp;
+  ExampleClass exC;
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -115,11 +115,14 @@ int main(void)
   {
     /* USER CODE END WHILE */
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    HAL_Delay(1500);
+    HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+
     CDC_Transmit_FS(buffer,sizeof(buffer)-1);
-    HAL_Delay(1500);
-    fp.getProperty();
+    HAL_Delay(1000);
+    exC.printstaticUint8();
+    exC.printUint8();
+    exC.printChar();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
