@@ -120,8 +120,8 @@ int main(void)
 
     CDC_Transmit_FS(buffer,sizeof(buffer)-1);
     HAL_Delay(1000);
-    exC.printstaticUint8();
-    exC.printUint8();
+    // exC.printstaticUint8();
+    // exC.printUint8();
     exC.printChar();
     /* USER CODE BEGIN 3 */
   }

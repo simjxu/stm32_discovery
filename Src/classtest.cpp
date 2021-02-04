@@ -1,6 +1,11 @@
 #include "classtest.h"
 #include "usbd_cdc_if.h"                // Needed for CDC_Transmit_FS
 
+
+void usb_print(uint8_t* Buf, uint16_t Len){
+    while (CDC_Transmit_FS(Buf,Len)) {}     // Busy wait to ensure that the transmit completes
+}
+
 uint8_t ExampleClass::staticuint8Value[]="A Static Class Value\n";
 void ExampleClass::printstaticUint8() 
 {
@@ -25,9 +30,8 @@ void ExampleClass::printUint8()
 void ExampleClass::printChar()
 {
     int len = strlen(this->charValue);
-    uint8_t charout[] = "printChar Output: ";
-    CDC_Transmit_FS(charout, 18);
-    HAL_Delay(5);                      // Delay needed because need to wait for USB to not be in use. Is there a better way?
-    CDC_Transmit_FS((uint8_t*)this->charValue,len);        
-    HAL_Delay(5);
+    uint8_t charout[] = "printChar Output: ";     
+
+    usb_print(charout,18);
+    usb_print((uint8_t*)this->charValue,len);
 }

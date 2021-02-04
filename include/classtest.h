@@ -38,3 +38,13 @@ public:
     void printChar();
 
 };
+
+
+class UsbPrint {
+private:
+    static uint8_t ringbuffer[64];
+
+public:
+    // transmit part of buffer
+    void transmitBuffer();
+};
