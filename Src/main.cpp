@@ -119,7 +119,6 @@ int main(void)
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
     usb_print(buffer,sizeof(buffer)-1);
-    CDC_Transmit_FS(buffer,sizeof(buffer)-1);
     HAL_Delay(1000);
     exC.printstaticUint8();
     exC.printUint8();
