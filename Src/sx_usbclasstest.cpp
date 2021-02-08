@@ -1,4 +1,4 @@
-#include "classtest.h"
+#include "sx_usbclasstest.h"
 #include "usbd_cdc_if.h"                // Needed for CDC_Transmit_FS
 
 uint8_t ExampleClass::staticuint8Value[]="A Static Class Value\n";

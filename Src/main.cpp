@@ -27,7 +27,7 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
-#include "classtest.h"
+#include "sx_usbclasstest.h"
 
 
 /* Private includes ----------------------------------------------------------*/
