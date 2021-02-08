@@ -317,7 +317,11 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
-
+void usb_print(uint8_t* Buf, uint16_t Len)
+{
+    // Expecting CDC_Transmit to return USBD_OK once it's complete, which evalues to 0U, or False
+    while (CDC_Transmit_FS(Buf,Len)) {}     // Busy wait to ensure that the transmit completes
+}
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**
