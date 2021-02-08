@@ -27,7 +27,7 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
-#include "classtest.h"
+#include "sx_usbclasstest.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -118,6 +118,7 @@ int main(void)
     HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
+    usb_print(buffer,sizeof(buffer)-1);
     CDC_Transmit_FS(buffer,sizeof(buffer)-1);
     HAL_Delay(1000);
     exC.printstaticUint8();
