@@ -124,18 +124,17 @@ int main(void)
     HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
+    // USB print out tests
     usb_print(buffer,sizeof(buffer)-1);
     HAL_Delay(1000);
     exC.printstaticUint8();
     exC.printUint8();
     exC.printChar();
 
+    // Print out all the sensor readings
     sensors.printTemp(2);
-
-    // Read out float (optimized buffer array for room temperatures)
-    // temp_reading = BSP_TSENSOR_ReadTemp();
-    // usbprint_float(temp_reading,5);
-
+    sensors.printHumid(2);
+    sensors.printPressure(2);
 
     /* USER CODE BEGIN 3 */
   }
