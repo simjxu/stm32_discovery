@@ -21,8 +21,8 @@ void usbprint_float(float value, int precision)
     }
 
     // Convert integer and fraction parts to char buffers
-    char int_buf[8];                        // NOTE: MAX integer length of 8
-    char fract_buf[8];                      // NOTE: MAX decimal length of 8
+    char int_buf[16];                        // NOTE: MAX integer length of 16
+    char fract_buf[16];                      // NOTE: MAX decimal length of 16
 
     snprintf(int_buf,10,"%d",integer_pt);
     snprintf(fract_buf,10,"%d",fraction_pt);
