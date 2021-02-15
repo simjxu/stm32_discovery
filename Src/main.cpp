@@ -27,9 +27,10 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
-#include "stm32l475e_iot01_tsensor.h"
 
+#include "sx_sensors.h"
 #include "sx_usbclasstest.h"
+#include "sx_util.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -77,10 +78,11 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t buffer[]="Hello World!\n";
+  uint8_t buffer[]="SIMONXU!\n";
   ExampleClass exC;
-  float temp_reading;
-  char tempbuffer[16];
+  volatile float temp_reading;
+  char tempbuffer[3];
+  char str[16];
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -110,14 +112,14 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  BSP_TSENSOR_Init();
+  BSP_TSENSOR_Init();       // TODO: Move to sensors object to initialize all sensors simultaneously
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+    /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
     HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -131,8 +133,14 @@ int main(void)
     // Read out integer
     temp_reading = BSP_TSENSOR_ReadTemp();
     int temp_reading_int = temp_reading;
-    itoa(temp_reading_int,tempbuffer,10);         // Base 10
+    snprintf(tempbuffer,10,"%d\n",temp_reading_int);
+
     usb_print((uint8_t*)tempbuffer,sizeof(tempbuffer));
+
+    // Read out float
+    char tempfloatbuffer[10];
+    float_to_array(temp_reading,4,tempfloatbuffer);
+    usb_print((uint8_t*)tempfloatbuffer,sizeof(tempfloatbuffer));
 
     /* USER CODE BEGIN 3 */
   }
