@@ -79,8 +79,11 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   uint8_t buffer[]="SIMONXU!\n";
+  uint8_t carriage_return[]="\n";
   ExampleClass exC;
-  volatile float temp_reading;
+  Sensors sensors;
+
+
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -110,7 +113,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  BSP_TSENSOR_Init();       // TODO: Move to sensors object to initialize all sensors simultaneously
+  // BSP_TSENSOR_Init();       // TODO: Move to sensors object to initialize all sensors simultaneously
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -122,16 +125,22 @@ int main(void)
     HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
+    // USB print out tests
     usb_print(buffer,sizeof(buffer)-1);
-    HAL_Delay(1000);
     exC.printstaticUint8();
     exC.printUint8();
     exC.printChar();
+    usb_print(carriage_return,sizeof(carriage_return)-1);
+    HAL_Delay(1000);
 
-    // Read out float (optimized buffer array for room temperatures)
-    temp_reading = BSP_TSENSOR_ReadTemp();
-    usbprint_float(temp_reading,5);
-
+    // Print out all the sensor readings
+    sensors.printTemp(2);
+    sensors.printHumid(2);
+    sensors.printPressure(2);
+    sensors.printAccel();
+    sensors.printGyro();
+    sensors.printMagneto();
+    usb_print(carriage_return,sizeof(carriage_return)-1);
 
     /* USER CODE BEGIN 3 */
   }
