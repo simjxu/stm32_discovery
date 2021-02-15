@@ -26,8 +26,11 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
-#include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
+// #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
+
+#include "sx_sensors.h"
 #include "sx_usbclasstest.h"
+#include "sx_util.h"
 
 
 /* Private includes ----------------------------------------------------------*/
@@ -75,8 +78,9 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t buffer[]="Hello World!\n";
+  uint8_t buffer[]="SIMONXU!\n";
   ExampleClass exC;
+  volatile float temp_reading;
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -106,14 +110,14 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+  BSP_TSENSOR_Init();       // TODO: Move to sensors object to initialize all sensors simultaneously
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+    /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
     HAL_Delay(1000);
     HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -123,6 +127,12 @@ int main(void)
     exC.printstaticUint8();
     exC.printUint8();
     exC.printChar();
+
+    // Read out float (optimized buffer array for room temperatures)
+    temp_reading = BSP_TSENSOR_ReadTemp();
+    usbprint_float(temp_reading,5);
+
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
