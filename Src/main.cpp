@@ -27,6 +27,8 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
+#include "stm32l475e_iot01_tsensor.h"
+
 #include "sx_usbclasstest.h"
 
 
@@ -77,6 +79,8 @@ int main(void)
   /* USER CODE BEGIN 1 */
   uint8_t buffer[]="Hello World!\n";
   ExampleClass exC;
+  float temp_reading;
+  char tempbuffer[16];
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -106,7 +110,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+  BSP_TSENSOR_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,6 +127,13 @@ int main(void)
     exC.printstaticUint8();
     exC.printUint8();
     exC.printChar();
+
+    // Read out integer
+    temp_reading = BSP_TSENSOR_ReadTemp();
+    int temp_reading_int = temp_reading;
+    itoa(temp_reading_int,tempbuffer,10);         // Base 10
+    usb_print((uint8_t*)tempbuffer,sizeof(tempbuffer));
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
