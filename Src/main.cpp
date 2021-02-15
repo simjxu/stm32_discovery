@@ -26,7 +26,7 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
-#include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
+// #include "usbd_cdc_if.h"      // need to add this to access CDC_Transmit_FS
 
 #include "sx_sensors.h"
 #include "sx_usbclasstest.h"
@@ -81,8 +81,6 @@ int main(void)
   uint8_t buffer[]="SIMONXU!\n";
   ExampleClass exC;
   volatile float temp_reading;
-  char tempbuffer[3];
-  char str[16];
   // uint8_t buffer[]={0x56,0x57,0x58};
   /* USER CODE END 1 */
 
@@ -130,17 +128,10 @@ int main(void)
     exC.printUint8();
     exC.printChar();
 
-    // Read out integer
+    // Read out float (optimized buffer array for room temperatures)
     temp_reading = BSP_TSENSOR_ReadTemp();
-    int temp_reading_int = temp_reading;
-    snprintf(tempbuffer,10,"%d\n",temp_reading_int);
+    usbprint_float(temp_reading,5);
 
-    usb_print((uint8_t*)tempbuffer,sizeof(tempbuffer));
-
-    // Read out float
-    char tempfloatbuffer[10];
-    float_to_array(temp_reading,4,tempfloatbuffer);
-    usb_print((uint8_t*)tempfloatbuffer,sizeof(tempfloatbuffer));
 
     /* USER CODE BEGIN 3 */
   }

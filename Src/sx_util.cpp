@@ -1,6 +1,6 @@
 #include "sx_util.h"
 
-void float_to_array(float value, int precision, char* outStr)
+void usbprint_float(float value, int precision)
 {
     int integer_pt = value;
     volatile float fraction = (value-integer_pt)*pow(10,precision);
@@ -21,8 +21,8 @@ void float_to_array(float value, int precision, char* outStr)
     }
 
     // Convert integer and fraction parts to char buffers
-    char int_buf[8];
-    char fract_buf[8];
+    char int_buf[8];                        // NOTE: MAX integer length of 8
+    char fract_buf[8];                      // NOTE: MAX decimal length of 8
 
     snprintf(int_buf,10,"%d",integer_pt);
     snprintf(fract_buf,10,"%d",fraction_pt);
@@ -32,6 +32,7 @@ void float_to_array(float value, int precision, char* outStr)
     // Add the newline
     strcat(fract_buf,"\n");
 
+    char outStr[16];
     // Put the characters into the array
     for(int i=0;i<count_int+1;i++){
         outStr[i] = int_buf[i];
@@ -39,5 +40,7 @@ void float_to_array(float value, int precision, char* outStr)
     for(int i=0;i<=count_fract+1;i++){
         outStr[count_int+1+i] = fract_buf[i];
     }
+
+    usb_print((uint8_t*)outStr,count_int+count_fract+2);
     
 }
