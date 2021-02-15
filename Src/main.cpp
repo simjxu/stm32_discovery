@@ -79,6 +79,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   uint8_t buffer[]="SIMONXU!\n";
+  uint8_t carriage_return[]="\n";
   ExampleClass exC;
   Sensors sensors;
 
@@ -126,15 +127,20 @@ int main(void)
 
     // USB print out tests
     usb_print(buffer,sizeof(buffer)-1);
-    HAL_Delay(1000);
     exC.printstaticUint8();
     exC.printUint8();
     exC.printChar();
+    usb_print(carriage_return,sizeof(carriage_return)-1);
+    HAL_Delay(1000);
 
     // Print out all the sensor readings
     sensors.printTemp(2);
     sensors.printHumid(2);
     sensors.printPressure(2);
+    sensors.printAccel();
+    sensors.printGyro();
+    sensors.printMagneto();
+    usb_print(carriage_return,sizeof(carriage_return)-1);
 
     /* USER CODE BEGIN 3 */
   }

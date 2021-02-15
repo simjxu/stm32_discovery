@@ -15,10 +15,13 @@ public:
     // Initialize sensors in constructor
     Sensors()
     {
-        // Initialize temperature sensor
+        // Initialize all sensors
         BSP_TSENSOR_Init();
         BSP_HSENSOR_Init();
         BSP_PSENSOR_Init();
+        BSP_ACCELERO_Init();
+        BSP_GYRO_Init();
+        BSP_MAGNETO_Init();
     }
 
     /**
@@ -44,4 +47,26 @@ public:
      * 
      */
     void printPressure(int precision);
+
+    /**
+     * @brief Prints the accelerometer sensor reading, looks like it is in units of milli-g's
+     * 
+     */
+    void printAccel();
+
+    /**
+     * @brief Prints the gyro sensor reading
+     *
+     * @param precision: Number of decimal places to the right of decimal to print
+     * 
+     */
+    void printGyro();
+
+    /**
+     * @brief Prints the magnetometer reading
+     *
+     * @param precision: Number of decimal places to the right of decimal to print
+     * 
+     */
+    void printMagneto();
 };
