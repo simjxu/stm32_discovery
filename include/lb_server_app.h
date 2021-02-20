@@ -1,8 +1,8 @@
 /**
  ******************************************************************************
- * @file    stm32l4xx_it.h
+ * @file    lb_server_app.h
  * @author  MCD Application Team
- * @brief   This file contains the headers of the interrupt handlers.
+ * @brief   Header for lb_server_app.c module
  ******************************************************************************
  * @attention
  *
@@ -18,8 +18,8 @@
  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32L4xx_IT_H
-#define __STM32L4xx_IT_H
+#ifndef __LB_SERVER_APP_H
+#define __LB_SERVER_APP_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,28 +28,17 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
+/* External variables --------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-
-void NMI_Handler(void);
-void HardFault_Handler(void);
-void MemManage_Handler(void);
-void BusFault_Handler(void);
-void UsageFault_Handler(void);
-void SVC_Handler(void);
-void DebugMon_Handler(void);
-void PendSV_Handler(void);
-void SysTick_Handler(void);
-
-void RTC_WKUP_IRQHandler(void); 
-void EXTI9_5_IRQHandler(void);         /* BNRG_SPI_EXTI_IRQHandler   */
-void DMA2_Channel1_IRQHandler(void);   /* BNRG_SPI_RX_DMA_IRQHandler */
-void DMA2_Channel2_IRQHandler(void);   /* BNRG_SPI_TX_DMA_IRQHandler */
+  
+void LB_App_Button_Trigger_Received(void);
+void BLE_App_LedButton_EndDevice_Init(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __STM32L4xx_IT_H */
+#endif /*__LB_SERVER_APP_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

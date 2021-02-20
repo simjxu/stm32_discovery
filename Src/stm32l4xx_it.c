@@ -1,254 +1,207 @@
-/* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    stm32l4xx_it.c
-  * @brief   Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
+ ******************************************************************************
+ * @file    stm32l4xx_it.c
+ * @author  MCD Application Team
+ * @brief   Main Interrupt Service Routines.
+ *          This file provides template for all exceptions handler and
+ *          peripherals interrupt service routine.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license SLA0044,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        http://www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "stm32l4xx_it.h"
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-/* USER CODE END Includes */
+#include "common.h"
+#include "hw.h"
+#include "stm32l475e_iot01.h"
+
+
+/** @addtogroup STM32L4xx_BLE_IT_Handlers
+  * @{
+  */
 
 /* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN TD */
-
-/* USER CODE END TD */
-
 /* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
 /* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
 /* Private variables ---------------------------------------------------------*/
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
 /* Private function prototypes -----------------------------------------------*/
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/* External variables --------------------------------------------------------*/
-extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
-/* USER CODE BEGIN EV */
-
-/* USER CODE END EV */
+/* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/
-/*           Cortex-M4 Processor Interruption and Exception Handlers          */
+/*            Cortex-M4 Processor Exceptions Handlers                         */
 /******************************************************************************/
+
 /**
-  * @brief This function handles Non maskable interrupt.
+  * @brief  This function handles NMI exception.
+  * @param  None
+  * @retval None
   */
 void NMI_Handler(void)
 {
-  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-  while (1)
-  {
-  }
-  /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Hard fault interrupt.
+  * @brief  This function handles Hard Fault exception.
+  * @param  None
+  * @retval None
   */
 void HardFault_Handler(void)
 {
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-
-  /* USER CODE END HardFault_IRQn 0 */
+  /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
   {
-    /* USER CODE BEGIN W1_HardFault_IRQn 0 */
-    /* USER CODE END W1_HardFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Memory management fault.
+  * @brief  This function handles Memory Manage exception.
+  * @param  None
+  * @retval None
   */
 void MemManage_Handler(void)
 {
-  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
-
-  /* USER CODE END MemoryManagement_IRQn 0 */
+  /* Go to infinite loop when Memory Manage exception occurs */
   while (1)
   {
-    /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
-    /* USER CODE END W1_MemoryManagement_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Prefetch fault, memory access fault.
+  * @brief  This function handles Bus Fault exception.
+  * @param  None
+  * @retval None
   */
 void BusFault_Handler(void)
 {
-  /* USER CODE BEGIN BusFault_IRQn 0 */
-
-  /* USER CODE END BusFault_IRQn 0 */
+  /* Go to infinite loop when Bus Fault exception occurs */
   while (1)
   {
-    /* USER CODE BEGIN W1_BusFault_IRQn 0 */
-    /* USER CODE END W1_BusFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Undefined instruction or illegal state.
+  * @brief  This function handles Usage Fault exception.
+  * @param  None
+  * @retval None
   */
 void UsageFault_Handler(void)
 {
-  /* USER CODE BEGIN UsageFault_IRQn 0 */
-
-  /* USER CODE END UsageFault_IRQn 0 */
+  /* Go to infinite loop when Usage Fault exception occurs */
   while (1)
   {
-    /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
-    /* USER CODE END W1_UsageFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles System service call via SWI instruction.
+  * @brief  This function handles SVCall exception.
+  * @param  None
+  * @retval None
   */
 void SVC_Handler(void)
 {
-  /* USER CODE BEGIN SVCall_IRQn 0 */
-
-  /* USER CODE END SVCall_IRQn 0 */
-  /* USER CODE BEGIN SVCall_IRQn 1 */
-
-  /* USER CODE END SVCall_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Debug monitor.
+  * @brief  This function handles Debug Monitor exception.
+  * @param  None
+  * @retval None
   */
 void DebugMon_Handler(void)
 {
-  /* USER CODE BEGIN DebugMonitor_IRQn 0 */
-
-  /* USER CODE END DebugMonitor_IRQn 0 */
-  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
-
-  /* USER CODE END DebugMonitor_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Pendable request for system service.
+  * @brief  This function handles PendSVC exception.
+  * @param  None
+  * @retval None
   */
 void PendSV_Handler(void)
 {
-  /* USER CODE BEGIN PendSV_IRQn 0 */
-
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-  /* USER CODE END PendSV_IRQn 1 */
 }
 
 /**
-  * @brief This function handles System tick timer.
+  * @brief  This function handles SysTick Handler.
+  * @param  None
+  * @retval None
   */
 void SysTick_Handler(void)
 {
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
 }
 
 /******************************************************************************/
-/* STM32L4xx Peripheral Interrupt Handlers                                    */
-/* Add here the Interrupt Handlers for the used peripherals.                  */
-/* For the available peripheral interrupt handler names,                      */
-/* please refer to the startup file (startup_stm32l4xx.s).                    */
+/*                 STM32L4xx Peripherals Interrupt Handlers                   */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+/*  available peripheral interrupt handler's name please refer to the startup */
+/*  file (startup_stm32l4xx.s).                                               */
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line[9:5] interrupts.
-  */
-void EXTI9_5_IRQHandler(void)
+ * @brief  This function handles RTC Auto wake-up interrupt request.
+ * @param  None
+ * @retval None
+ */
+void RTC_WKUP_IRQHandler(void)
 {
-  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-
-  /* USER CODE END EXTI9_5_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8);
-  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
-
-  /* USER CODE END EXTI9_5_IRQn 1 */
+  HW_TS_RTC_Wakeup_Handler();
 }
 
 /**
-  * @brief This function handles EXTI line[15:10] interrupts.
-  */
-void EXTI15_10_IRQHandler(void)
+ * @brief  This function handles External line
+ *         interrupt request for BlueNRG.
+ * @param  None
+ * @retval None
+ */
+void EXTI9_5_IRQHandler(void)           /* BNRG_SPI_EXTI_IRQHandler */
 {
-  /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-
-  /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_13);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_15);
-  /* USER CODE BEGIN EXTI15_10_IRQn 1 */
-
-  /* USER CODE END EXTI15_10_IRQn 1 */
+  HAL_GPIO_EXTI_IRQHandler(BNRG_SPI_EXTI_PIN);
 }
 
 /**
-  * @brief This function handles USB OTG FS global interrupt.
-  */
-void OTG_FS_IRQHandler(void)
+ * @brief  This function handles External line
+ *         interrupt request.
+ * @param  None
+ * @retval None
+ */
+void EXTI15_10_IRQHandler(void)  /* PUSH_BUTTON_EXTI_IRQHandler */
 {
-  /* USER CODE BEGIN OTG_FS_IRQn 0 */
-
-  /* USER CODE END OTG_FS_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
-  /* USER CODE BEGIN OTG_FS_IRQn 1 */
-
-  /* USER CODE END OTG_FS_IRQn 1 */
+  HAL_GPIO_EXTI_IRQHandler(USER_BUTTON_PIN);
 }
 
-/* USER CODE BEGIN 1 */
+/**
+ * @brief  This function handles DMA Rx interrupt request.
+ * @param  None
+ * @retval None
+ */
+void DMA2_Channel1_IRQHandler(void)     /* BNRG_SPI_RX_DMA_IRQHandler */
+  {
+    HW_BNRG_DMARxCb();
+  }
 
-/* USER CODE END 1 */
+/**
+ * @brief  This function handles DMA Tx interrupt request.
+ * @param  None
+ * @retval None
+ */
+void DMA2_Channel2_IRQHandler(void)    /* BNRG_SPI_TX_DMA_IRQHandler */
+  {
+    HW_BNRG_DMATxCb();
+
+  return;
+}
+/**
+  * @}
+  */
+
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
