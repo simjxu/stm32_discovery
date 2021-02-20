@@ -32,6 +32,7 @@
 #include "sx_usbclasstest.h"
 #include "sx_util.h"
 
+bool sensorprint_flag = 0;
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -120,11 +121,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
-    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    // HAL_Delay(1000);
-    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-
+    if(sensorprint_flag){
+      // Print out all the sensor readings
+      sensors.printTemp(2);
+      sensors.printHumid(2);
+      sensors.printPressure(2);
+      sensors.printAccel();
+      sensors.printGyro();
+      sensors.printMagneto();
+      usb_print(carriage_return,sizeof(carriage_return)-1);
+      sensorprint_flag=0;
+    }
     // // USB print out tests
     // usb_print(buffer,sizeof(buffer)-1);
     // exC.printstaticUint8();
@@ -133,14 +140,16 @@ int main(void)
     // usb_print(carriage_return,sizeof(carriage_return)-1);
     // HAL_Delay(1000);
 
-    // // Print out all the sensor readings
-    // sensors.printTemp(2);
-    // sensors.printHumid(2);
-    // sensors.printPressure(2);
-    // sensors.printAccel();
-    // sensors.printGyro();
-    // sensors.printMagneto();
-    // usb_print(carriage_return,sizeof(carriage_return)-1);
+    
+    
+    HAL_Delay(100);
+    // /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
+    // // Old LED toggle
+    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    // HAL_Delay(1000);
+    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+
+    
 
     /* USER CODE BEGIN 3 */
   }
@@ -448,7 +457,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(GPIO_Pin);
-  uint8_t buffert[] = "TEST";
+  sensorprint_flag = 1;
   HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
   // usb_print(buffert,sizeof(buffert)-1);
   for(uint32_t i=0; i<10000; i++);
