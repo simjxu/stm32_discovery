@@ -121,6 +121,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    // Put all this into a queue
     if(sensorprint_flag){
       // Print out all the sensor readings
       sensors.printTemp(2);
@@ -457,10 +458,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(GPIO_Pin);
-  sensorprint_flag = 1;
-  HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
+  if(sensorprint_flag==0){
+    // try using a queue
+    sensorprint_flag = 1;
+    HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
+  }
+  
   // usb_print(buffert,sizeof(buffert)-1);
-  for(uint32_t i=0; i<10000; i++);
 }
 /* USER CODE END 4 */
 
