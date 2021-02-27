@@ -3,12 +3,12 @@
 void usbprint_float(float value, int precision)
 {
     int integer_pt = value;
-    volatile float fraction = (value-integer_pt)*pow(10,precision);
+    float fraction = (value-integer_pt)*pow(10,precision);
     int fraction_pt = fraction;
 
     // count number of digits
-    volatile int count_int = 0;
-    volatile int count_fract = 0;
+    int count_int = 0;
+    int count_fract = 0;
     int n = integer_pt;
     while (n != 0) {
         n /= 10;  

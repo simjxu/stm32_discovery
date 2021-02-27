@@ -123,6 +123,8 @@ int main(void)
   {
     // Put all this into a queue
     if(sensorprint_flag){
+      // Toggle the LED
+      HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
       // Print out all the sensor readings
       sensors.printTemp(2);
       sensors.printHumid(2);
@@ -143,7 +145,9 @@ int main(void)
 
     
     
-    HAL_Delay(100);
+    HAL_Delay(300);
+    // Clear flags after tick
+    
     // /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
     // // Old LED toggle
     // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -461,7 +465,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   if(sensorprint_flag==0){
     // try using a queue
     sensorprint_flag = 1;
-    HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
+    
   }
   
   // usb_print(buffert,sizeof(buffert)-1);
