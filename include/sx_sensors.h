@@ -10,7 +10,6 @@
 
 class Sensors {
 private:
-    
 
 public:
     // Initialize sensors in constructor
