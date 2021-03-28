@@ -5,6 +5,7 @@
 #include <string.h>
 #include <math.h>
 #include "usbd_cdc_if.h"        // need to add this to access CDC_Transmit_FS or usb_print
+#include <queue>
 
 /**
   * @brief  Convert a float to a character array. Note, no error handling. Need to ensure that outStr
