@@ -78,8 +78,8 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t buffer[]="SIMONXU!\n";
-  uint8_t carriage_return[]="\n";
+  uint8_t buffer[]="SIMONXU!\r\n";
+  uint8_t carriage_return[]="\r\n";
   ExampleClass exC;
   Sensors sensors;
 
@@ -140,7 +140,8 @@ int main(void)
     sensors.printAccel();
     sensors.printGyro();
     sensors.printMagneto();
-    usb_print(carriage_return,sizeof(carriage_return)-1);
+    usb_print(carriage_return,sizeof(carriage_return));
+    HAL_Delay(1000);
 
     /* USER CODE BEGIN 3 */
   }

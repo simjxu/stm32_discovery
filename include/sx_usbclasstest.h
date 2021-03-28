@@ -16,7 +16,7 @@ public:
     {               
         for(int i=0;i<8;i++){uint8Value[i]=i+'0';};       // Option 1: Need loop. char is already a number
         // ^^ Conversion from integer to char just needs a + '0'
-        strcpy(charValue,"charstr\n");              // Option 2: use strcpy instead
+        strcpy(charValue,"charstr\r\n");              // Option 2: use strcpy instead
     };
 
     /**

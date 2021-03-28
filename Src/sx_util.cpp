@@ -29,8 +29,6 @@ void usbprint_float(float value, int precision)
 
     // Add on the decimal point
     strcat(int_buf,".");
-    // Add the newline
-    strcat(fract_buf,"\n");
 
     char outStr[16];
     // Put the characters into the array
