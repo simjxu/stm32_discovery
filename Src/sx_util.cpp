@@ -3,12 +3,12 @@
 void usbprint_float(float value, int precision)
 {
     int integer_pt = value;
-    float fraction = (value-integer_pt)*pow(10,precision);
+    volatile float fraction = (value-integer_pt)*pow(10,precision);
     int fraction_pt = fraction;
 
     // count number of digits
-    int count_int = 0;
-    int count_fract = 0;
+    volatile int count_int = 0;
+    volatile int count_fract = 0;
     int n = integer_pt;
     while (n != 0) {
         n /= 10;  
@@ -29,8 +29,6 @@ void usbprint_float(float value, int precision)
 
     // Add on the decimal point
     strcat(int_buf,".");
-    // Add the newline
-    strcat(fract_buf,"\n");
 
     char outStr[16];
     // Put the characters into the array

@@ -79,8 +79,8 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  uint8_t buffer[]="SIMONXU!\n";
-  uint8_t carriage_return[]="\n";
+  uint8_t buffer[]="SIMONXU!\r\n";
+  uint8_t carriage_return[]="\r\n";
   ExampleClass exC;
   Sensors sensors;
 
@@ -121,40 +121,28 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // Put all this into a queue
-    if(sensorprint_flag){
-      // Toggle the LED
-      HAL_GPIO_TogglePin(GPIOB,LED2_Pin);
-      // Print out all the sensor readings
-      sensors.printTemp(2);
-      sensors.printHumid(2);
-      sensors.printPressure(2);
-      sensors.printAccel();
-      sensors.printGyro();
-      sensors.printMagneto();
-      usb_print(carriage_return,sizeof(carriage_return)-1);
-      sensorprint_flag=0;
-    }
-    // // USB print out tests
-    // usb_print(buffer,sizeof(buffer)-1);
-    // exC.printstaticUint8();
-    // exC.printUint8();
-    // exC.printChar();
-    // usb_print(carriage_return,sizeof(carriage_return)-1);
-    // HAL_Delay(1000);
+    /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
+    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    HAL_Delay(1000);
+    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 
-    
-    
-    HAL_Delay(300);
-    // Clear flags after tick
-    
-    // /* USER CODE END WHILE ------------------------------------------------------------------------------------------------------------------------------------ */ 
-    // // Old LED toggle
-    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    // HAL_Delay(1000);
-    // HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    // USB print out tests
+    usb_print(buffer,sizeof(buffer)-1);
+    exC.printstaticUint8();
+    exC.printUint8();
+    exC.printChar();
+    usb_print(carriage_return,sizeof(carriage_return)-1);
+    HAL_Delay(1000);
 
-    
+    // Print out all the sensor readings
+    sensors.printTemp(2);
+    sensors.printHumid(2);
+    sensors.printPressure(2);
+    sensors.printAccel();
+    sensors.printGyro();
+    sensors.printMagneto();
+    usb_print(carriage_return,sizeof(carriage_return));
+    HAL_Delay(1000);
 
     /* USER CODE BEGIN 3 */
   }
